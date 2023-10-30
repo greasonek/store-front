@@ -25,7 +25,7 @@ const Category = ({category}) => {
       </Typography>
     </CardContent>
     <CardActions>
-      <Button size="small" onClick={handleClick} variant='outlined' color='success'>Select</Button>
+      <Button size="small" onClick={handleClick} variant='outlined' color='success'>{`Select ${category.name}`}</Button>
     </CardActions>
   </Card>
   </Grid>

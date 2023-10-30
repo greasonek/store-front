@@ -43,6 +43,8 @@ const ProductModal = () => {
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {`$${selectedProduct.price}`}
+          <hr/>
+          {`${selectedProduct.inStock} in stock`}
         </Typography>
       </CardContent>
       <CardActions>
