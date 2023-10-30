@@ -27,11 +27,12 @@ const Product = ({product}) => {
           {product.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {`$${product.price}`}
+          {` in ${product.category}`}
+
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={handleClick} variant='outlined' color='success'>Select</Button>
+        <Button size="small" onClick={handleClick} variant='outlined' color='success'>{`View ${product.name}`}</Button>
       </CardActions>
     </Card>
     </Grid>
