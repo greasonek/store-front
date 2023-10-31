@@ -6,7 +6,7 @@ const Browse = () => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.category.displayName)
   const handleChange = (e) => {
-    dispatch(productSlice.actions.chooseCategory(e.target.value))
+    dispatch(productSlice.actions.selectedCategory(e.target.value))
   }
   return (
     <FormControl fullWidth>

@@ -1,11 +1,11 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from  '@mui/material';
-// import { useDispatch } from 'react-redux';
-// import productSlice from '../../Store/products';
+import { useDispatch } from 'react-redux';
+import categorySlice from '../../Store/categories';
 
 const Category = ({category}) => {
-
+  const dispatch = useDispatch();
   const handleClick = () => {
-
+    dispatch(categorySlice.actions.showCategory(category));
   }
 
   return (
