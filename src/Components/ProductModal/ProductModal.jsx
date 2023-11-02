@@ -1,6 +1,7 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Modal, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import productSlice from "../../Store/products";
+import cartSlice from "../../Store/cart";
 
 const style = {
   position: 'absolute',
@@ -25,6 +26,10 @@ const ProductModal = () => {
     // dispatch the action and pass the action the payload
     dispatch(productSlice.actions.showProduct(undefined));
   };
+  const handleAddToCart = (selectedProduct) => {
+    dispatch(cartSlice.actions.addToCart(selectedProduct));
+  }
+
   return (
     <Modal
     open={selectedProduct != undefined}
@@ -42,12 +47,11 @@ const ProductModal = () => {
           {selectedProduct.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {`$${selectedProduct.price}`}
-          <hr/>
-          {`${selectedProduct.inStock} in stock`}
+          {`$${selectedProduct.price} - ${selectedProduct.inStock} in stock`}
         </Typography>
       </CardContent>
       <CardActions>
+        {selectedProduct.unavailable ? <Button disabled={selectedProduct.unavailable}>Out of Stock</Button> : <Button size="small" onClick={() => handleAddToCart(selectedProduct)} variant='outlined' color='success' fullWidth>Add to Cart</Button>}
         <Button size="small" onClick={handleClose} variant='outlined' color='success'>Close</Button>
       </CardActions>
     </Card> 

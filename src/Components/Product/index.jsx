@@ -2,6 +2,7 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from  '@mui/material';
 import { useDispatch } from 'react-redux';
 import productSlice from '../../Store/products';
+import cartSlice from '../../Store/cart';
 
 const Product = ({product}) => {
   // define the dispatch  
@@ -12,6 +13,9 @@ const Product = ({product}) => {
     // dispatch the action and pass the action the payload
     dispatch(productSlice.actions.showProduct(product));
   };
+  const handleAddToCart = (product) => {
+    dispatch(cartSlice.actions.addToCart(product));
+  }
 
   return (
     <>
@@ -32,7 +36,9 @@ const Product = ({product}) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={handleClick} variant='outlined' color='success'>{`View ${product.name}`}</Button>
+        {product.unavailable ? <Button disabled={product.unavailable}>Out of Stock</Button> : <Button size="small" onClick={() => handleAddToCart(product)} variant='outlined' color='success' disabled={product.inStock === 0}>Add to Cart</Button>}
+        <Button size="small" onClick={handleClick} variant='outlined' color='success'>View Details</Button>
+
       </CardActions>
     </Card>
     </Grid>

@@ -6,7 +6,8 @@ const productSlice = createSlice({
   initialState: {
     productData: productData,
     selectedProduct: undefined,
-    selectedCategory: undefined
+    selectedCategory: undefined,
+    unavailable: false
   },
   reducers: {
     // name of action to dispatch --> state and action that occurs
@@ -16,7 +17,13 @@ const productSlice = createSlice({
     },
     showCategory: (state, action) => {
       state.selectedCategory = action.payload;
-    }
+    },
+    reduceStock: (state, action) => {
+      state.selectedProduct = action.payload;
+      if(state.selectedProduct === 0){
+        state.unavailable = true;
+      }
+    },
   }
 });
 
