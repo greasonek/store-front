@@ -22,6 +22,15 @@ const productSlice = createSlice({
       state.selectedProduct = action.payload;
       if(state.selectedProduct === 0){
         state.unavailable = true;
+      } else {
+        const newProducts = state.productData.products.map(p => {
+          if(p.name === action.payload.name){
+            p.inStock -= 1;
+          }
+          return p;
+        })
+        state.productData.products = newProducts;
+        state.selectedProduct = {...state.selectedProduct, inStock: state.selectedProduct.inStock -= 1}
       }
     },
   }

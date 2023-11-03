@@ -28,6 +28,8 @@ const ProductModal = () => {
   };
   const handleAddToCart = (selectedProduct) => {
     dispatch(cartSlice.actions.addToCart(selectedProduct));
+    dispatch(productSlice.actions.reduceStock(selectedProduct));
+
   }
 
   return (
