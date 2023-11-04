@@ -15,6 +15,7 @@ const Product = ({product}) => {
   };
   const handleAddToCart = (product) => {
     dispatch(cartSlice.actions.addToCart(product));
+    dispatch(productSlice.actions.reduceStock(product));
   }
 
   return (
