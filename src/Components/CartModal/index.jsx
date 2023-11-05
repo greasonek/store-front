@@ -1,8 +1,10 @@
 import { Button,Dialog, DialogActions, DialogTitle, DialogContent, Avatar, ListItem, ListItemAvatar, ListItemText, Typography } from "@mui/material"
-import React from "react";
+import React, { useEffect } from "react";
 // import { Popover } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import cartSlice from "../../Store/cart";
+import cartSlice from "../../Store/cartSlice";
+import { updateProduct} from "../../Store/productSlice";
+import { deleteProduct } from "../../Store/cartSlice";
 
 const CartModal = () => {
   const dispatch = useDispatch();
@@ -11,12 +13,18 @@ const CartModal = () => {
   const total = cartContents.reduce((acc, selectedProduct) => acc + selectedProduct.price, 0);
   // const anchorEl = document.getElementById("anchor");
 
+  // const listOfProducts = useSelector((state) => state.selectedProduct.listOfProducts);
+  useEffect(() => {
+    dispatch(deleteProduct());
+  }, [dispatch]);
+
   const handleClose = () => {
     dispatch(cartSlice.actions.showCart(false))
   }
 
-  const deleteItem = () => {
-    dispatch(cartSlice.actions.deleteItem(selectedProduct))
+  const handleDeleteProduct = ({selectedProduct}) => {
+    dispatch(updateProduct({selectedProduct, amount: +1}))
+    dispatch(cartSlice.actions.deleteProduct(selectedProduct));
   }
 
   return (
@@ -33,7 +41,7 @@ const CartModal = () => {
               <ListItemText primary={selectedProduct.name}/>
               <Typography> 
                  ${selectedProduct.price}
-                <Button variant="outlined" color="error" onClick={deleteItem}>X</Button>
+                <Button variant="outlined" color="error" onClick={handleDeleteProduct}>X</Button>
                 </Typography>
                 <hr/>
             </ListItem>

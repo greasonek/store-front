@@ -1,6 +1,6 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from  '@mui/material';
+import { Button, Card, CardActions, CardContent, Grid, Typography } from  '@mui/material';
 import { useDispatch } from 'react-redux';
-import categorySlice from '../../Store/categories';
+import categorySlice from '../../Store/categoriesSlice';
 
 const Category = ({category}) => {
   const dispatch = useDispatch();
@@ -11,11 +11,11 @@ const Category = ({category}) => {
   return (
     <Grid item xs={3}>
     <Card>
-    <CardMedia
+    {/* <CardMedia
       sx={{ height: 220 }}
       image={category.image_url}
       title={category.displayName}
-    />
+    /> */}
     <CardContent>
       <Typography gutterBottom variant="h5" component="div">
         {category.displayName}
