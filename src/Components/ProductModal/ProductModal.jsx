@@ -1,7 +1,7 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Modal, Typography } from "@mui/material";
+import { Button, Card, CardActions, CardContent, Modal, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import productSlice from "../../Store/products";
-import cartSlice from "../../Store/cart";
+import productSlice, { updateProduct} from "../../Store/productSlice";
+import cartSlice from "../../Store/cartSlice";
 
 const style = {
   position: 'absolute',
@@ -28,8 +28,8 @@ const ProductModal = () => {
   };
   const handleAddToCart = (selectedProduct) => {
     dispatch(cartSlice.actions.addToCart(selectedProduct));
+    dispatch(updateProduct({ selectedProduct, amount: -1}));
     dispatch(productSlice.actions.reduceStock(selectedProduct));
-
   }
 
   return (
@@ -39,11 +39,11 @@ const ProductModal = () => {
   >
       {selectedProduct ? (
       <Card style={style}>
-      <CardMedia
+      {/* <CardMedia
         sx={{ height: 220 }}
         image={selectedProduct.image_url}
         title={selectedProduct.name}
-      />
+      /> */}
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {selectedProduct.name}
@@ -53,7 +53,14 @@ const ProductModal = () => {
         </Typography>
       </CardContent>
       <CardActions>
-        {selectedProduct.unavailable ? <Button disabled={selectedProduct.unavailable}>Out of Stock</Button> : <Button size="small" onClick={() => handleAddToCart(selectedProduct)} variant='outlined' color='success' fullWidth>Add to Cart</Button>}
+        {selectedProduct.unavailable ? 
+        <Button disabled={selectedProduct.unavailable}>Out of Stock</Button> : 
+        <Button size="small" 
+          onClick={() => {
+            handleAddToCart(selectedProduct)}} 
+          variant='outlined' 
+          color='success' 
+          fullWidth>Add to Cart</Button>}
         <Button size="small" onClick={handleClose} variant='outlined' color='success'>Close</Button>
       </CardActions>
     </Card> 
