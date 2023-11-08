@@ -39,8 +39,12 @@ const cartSlice = createSlice({
       state.showCart = action.payload;
       // state.productsInCart += 1
     },
+    // deleteProduct: (state, action) => {
+    //   state.deleteProduct = action.payload;
+    // }
     deleteProduct: (state, action) => {
-      state.deleteProduct = action.payload;
+      const productIndex = action.payload;
+      state.cart.splice(productIndex, 1)
     }
   },
   extraReducers: (builder) => {
