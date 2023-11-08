@@ -22,10 +22,15 @@ const CartModal = () => {
     dispatch(cartSlice.actions.showCart(false))
   }
 
-  const handleDeleteProduct = ({selectedProduct}) => {
-    dispatch(updateProduct({selectedProduct, amount: +1}))
-    dispatch(cartSlice.actions.deleteProduct(selectedProduct));
+  // const handleDeleteProduct = ({selectedProduct}) => {
+  //   dispatch(updateProduct({selectedProduct, amount: +1}))
+  //   dispatch(cartSlice.actions.deleteProduct(selectedProduct));
+  // }
+  const handleDeleteProduct = (selectedProduct, index) => {
+    dispatch(cartSlice.actions.deleteProduct(index));
+    dispatch(updateProduct({ product: selectedProduct, amount: +1}))
   }
+
 
   return (
     
