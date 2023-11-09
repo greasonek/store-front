@@ -1,8 +1,11 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Modal, Typography } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import {Link} from 'react-router-dom'
+import { Button, Typography, Card, CardMedia, CardActions, CardContent } from '@mui/material'
+import { useDispatch, useSelector } from 'react-redux'
 import productSlice, { updateProduct} from "../../Store/productSlice";
 import cartSlice from "../../Store/cartSlice";
+import Header from "../Header";
+import CartModal from "../CartModal";
+import { Link } from "react-router-dom";
+
 
 const style = {
   position: 'absolute',
@@ -17,28 +20,22 @@ const style = {
   padding: 10,
 };
 
-
-const ProductModal = () => {
+const ProductDetails = () => {
   const selectedProduct = useSelector((state) => state.product.selectedProduct)
   const dispatch = useDispatch();
-  const handleClose = () => {
-    // dispatch the action to update the selectedProduct
-    // like setting state but we ask the store to do it
-    // dispatch the action and pass the action the payload
-    dispatch(productSlice.actions.showProduct(undefined));
-  };
+  
   const handleAddToCart = (selectedProduct) => {
     dispatch(cartSlice.actions.addToCart(selectedProduct));
     dispatch(updateProduct({ selectedProduct, amount: -1}));
     dispatch(productSlice.actions.reduceStock(selectedProduct));
   }
-
+  
   return (
-    <Modal
-    open={selectedProduct != undefined}
-    onClose={handleClose}
-  >
-      {selectedProduct ? (
+    <div>
+      <Header/>
+      <CartModal />
+
+{selectedProduct ? (
       <Card style={style}>
       <CardMedia
         sx={{ height: 220 }}
@@ -62,24 +59,25 @@ const ProductModal = () => {
           variant='contained' 
           color='success' 
           >Add to Cart</Button>}
-        <Link to={'/details'} style={{textDecoration:'none'}}>
-          <Typography 
-            style={{backgroundColor: 'gray', 
-              color: 'white', 
-              border: '1px solid gray', 
-              padding: '3px',
-              margin: '5px', 
-              borderRadius: '5px'}}>View Details
-          </Typography>
-          </Link>
-        <Button size="small" onClick={handleClose} variant='outlined' color='success'>Close</Button>
+      <Link to='/' style={{textDecoration:'none'}}>
+        <Typography 
+          style={{ 
+            color: 'green', 
+            margin: '10px', 
+            padding: '3px', 
+            border: '1px solid green', 
+            borderRadius: '5px'}}
+            >
+            Keep Shopping
+        </Typography>
+      </Link>
       </CardActions>
-    </Card> 
-    ) : ( 
-    <></>
-    )}
-  </Modal>
+    </Card>
+        ) : ( 
+          <></>
+          )}
+    </div>
   )
 }
 
-export default ProductModal
+export default ProductDetails
