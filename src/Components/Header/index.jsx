@@ -1,6 +1,5 @@
 import { AppBar, Toolbar, Typography } from "@mui/material"
 import Cart from "../Cart"
-// import CartModal from "../CartModal"
 
 const Header = () => {
   return (
@@ -10,7 +9,6 @@ const Header = () => {
           OUR STORE
         </Typography>
         <Cart />
-        {/* <CartModal/> */}
       </Toolbar>
     </AppBar>  )
 }

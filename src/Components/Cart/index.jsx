@@ -5,8 +5,7 @@ import cartSlice from '../../Store/cartSlice';
 
 const Cart = () => {
   const dispatch = useDispatch();
-  // const showCart = useSelector(state => state.cart.showCart);
-  const productsInCart = useSelector(state => state.cart.productsInCart);
+  const cart = useSelector(state => state.cart.cart);
   const handleClick = () => {
     dispatch(cartSlice.actions.showCart(true))
   }
@@ -14,7 +13,7 @@ const Cart = () => {
     <div>
       <IconButton color='success' onClick={handleClick}>
         <ShoppingCartIcon/>
-        ({productsInCart})
+        {cart.length}
       </IconButton>
     </div>
   )

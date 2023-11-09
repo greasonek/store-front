@@ -1,7 +1,5 @@
-// import { useSelector } from 'react-redux';
 import Category from '../Category';
 import { Grid } from '@mui/material'
-// import data from '../../productData.json'
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getCategories } from '../../Store/categoriesSlice';

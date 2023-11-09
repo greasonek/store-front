@@ -1,5 +1,5 @@
 // import data from '../../productData.json';
-import { Button, Card, CardActions, CardContent, Grid, Typography } from  '@mui/material';
+import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from  '@mui/material';
 import { useDispatch } from 'react-redux';
 import cartSlice from '../../Store/cartSlice';
 import productSlice, { updateProduct } from '../../Store/productSlice';
@@ -24,11 +24,11 @@ const Product = ({product}) => {
     <>
     <Grid item xs={3}>
     <Card>
-      {/* <CardMedia
+      <CardMedia
         sx={{ height: 220 }}
-        image={product.image_url}
+        image={`http://source.unsplash.com/random?${product.name}`}
         title={product.name}
-      /> */}
+      />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {product.name}
@@ -46,7 +46,7 @@ const Product = ({product}) => {
           color='success'
           disabled={product.inStock === 0}>Add to Cart
         </Button>}
-        <Button size="small" onClick={handleClick} variant='outlined' color='success'>View Details</Button>
+        <Button size="small" onClick={handleClick} variant='outlined' color='success'>Preview</Button>
 
       </CardActions>
     </Card>

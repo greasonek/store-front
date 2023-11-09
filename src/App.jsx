@@ -1,22 +1,21 @@
-import Header from "./Components/Header";
-import Footer from './Components/Footer';
-import Categories from "./Components/Categories";
-import Products from "./Components/Products";
-import ProductModal from "./Components/ProductModal/ProductModal";
-import CartModal from "./Components/CartModal";
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import StoreFront from "./Components/StoreFront";
+import ShoppingCart from "./Components/ShoppingCart";
+import ProductDetails from './Components/ProductDetails';
 
 function App() {
   return (
-    <>
-      <div>
-      <Header />
-      <CartModal/>
-      <Categories/>
-      <Products/>
-      <ProductModal/>
-      <Footer />
-      </div>
-    </>
+   
+      <>
+    <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<StoreFront />} />
+          <Route path='/details' element={<ProductDetails />}/>
+          <Route path='/checkout' element={<ShoppingCart />} />
+        </Routes>
+      </BrowserRouter>
+      </>
+
   )
 }
 
